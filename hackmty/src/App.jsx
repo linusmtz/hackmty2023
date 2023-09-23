@@ -6,24 +6,31 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import "./App.css";
 
+import { ChakraProvider } from '@chakra-ui/react'
+import NavBar from "./components/Navbar/NavBar";
+
+
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [images, setImages] = useState([]);
 
   return (
     <div className="app">
-      <BrowserRouter>
-        <main>
-          <Routes>
-            <Route
-              path="/home"
-              element={
-                <Home />
-              }
-            />
-          </Routes>
-        </main>
-      </BrowserRouter>
+        <ChakraProvider>
+            <BrowserRouter>
+              <main>
+                <Routes>
+                  <Route
+                    path="/home"
+                    element={
+                      <Home/>
+                    }
+                  />
+                </Routes>
+              </main>
+            </BrowserRouter>
+        </ChakraProvider>
     </div>
+    
   );
 }
