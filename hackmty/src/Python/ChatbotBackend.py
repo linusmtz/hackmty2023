@@ -122,7 +122,8 @@ def sendUserInput():
 
     
     write_string_to_file(resp, file_path_respActual)
-    return entradaDeUsuario
+    answer = read_file_to_string('hackmty/src/Python/Responses/respActual.txt')
+    return jsonify({'ans': answer})
 
 #setBotContext()
 #sendUserInput("En el caso de que este cliente quisiera invertir en Bienes Raices, que es lo que el banco le recomendaría?")

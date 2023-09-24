@@ -72,13 +72,16 @@ const Chatbot = () => {
   const handleSendMessage = async () => {
     if (inputMessage.trim() === '') return;
 
+    let respuesta = '';
+
     try {
       const data = { 
         'inputUser': inputMessage
       };
 
       const response = await axios.post('http://localhost:5000/entrada',data);
-      console.log(response);
+      respuesta = response.data.ans;
+      console.log(respuesta);
     } catch (error) {
       console.log(error);
     }
@@ -93,7 +96,7 @@ const Chatbot = () => {
     // Simulate a response from the chatbot (you can replace this with an actual API call)
     setTimeout(() => {
       const botResponse = {
-        text: 'Hello, I am the chatbot!',
+        text: respuesta,
         image: messages.length > 4 ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Logo_de_Banorte.svg/2560px-Logo_de_Banorte.svg.png' : null,
         user: false,
         isSpecial: true, // Add a flag to mark it as a special message
