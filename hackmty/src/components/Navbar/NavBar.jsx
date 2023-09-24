@@ -16,7 +16,6 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-//import banorteLogo from '../../assets/logoBanorte'
 
 const Links = ['Dashboard', 'Projects', 'Team'];
 
@@ -37,7 +36,7 @@ const NavLink = (props) => {
       }}
       href={'#'}
       color="white"
-      
+      alignSelf="center"
     >
       {children}
     </Box>
@@ -49,7 +48,7 @@ export default function NavBar() {
 
   return (
     <>
-      <Box bg={useColorModeValue('red.600', 'red.900')} px={4}>
+      <Box bg={useColorModeValue('gray.900', 'red.900')}  paddingTop="10px" paddingBottom="10px" px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
@@ -57,12 +56,24 @@ export default function NavBar() {
             aria-label={'Open Menu'}
             display={{ md: 'none' }}
             onClick={isOpen ? onClose : onOpen}
+           
             
 
           />
           <HStack spacing={8} alignItems={'center'}>
            
-            <Box color="white">Banorte</Box>
+           
+          <Box display="flex" alignItems="center" color="white">
+            <Avatar
+              name="Banorte Logo" // Provide an appropriate name for accessibility
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Logo_de_Banorte.svg/2560px-Logo_de_Banorte.svg.png" // Replace with the actual image source
+               // Adjust the size of the image as needed
+              marginRight="8px" // Add spacing between the image and text
+              backgroundSize="cover"
+              width="auto"
+            />
+          </Box>
+
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }} >
               {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
