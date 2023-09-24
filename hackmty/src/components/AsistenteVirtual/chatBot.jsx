@@ -63,7 +63,7 @@ const Chatbot = () => {
     setTimeout(() => {
       const botResponse = {
         text: respuesta,
-        image: messages.length > 0 ? 'https://aristeguinoticias.com/_next/image/?url=https%3A%2F%2Feditorial.aristeguinoticias.com%2Fwp-content%2Fuploads%2F2022%2F03%2Fprecio-barril-petroleo-mexico-pemex-grafica.jpg&w=1200&q=75' : null,
+        image: messages.length > 0 ? 'https://www.tradingview.com/x/NeqbwNgT/' : null,
         user: false,
         isSpecial: true, // Add a flag to mark it as a special message
       };
@@ -91,7 +91,7 @@ const Chatbot = () => {
       const updatedMessages = [...messages];
       updatedMessages[originalIndex].text = showDetails
         ? 'Hello, I am the chatbot!'
-        : 'hello friendhello friendhello friendhello friendhello friendhello frweewewewewiendhello friendhello friendhello friendhello friend';
+        : 'La gráfica representa el porcentaje de ganancias acumuladas por los inversores en Cetes Directo durante un período de tiempo específico. Esta gráfica y descripción de ventajas pueden ayudar a los inversores a comprender mejor las oportunidades y beneficios de invertir en Cetes Directo ';
       setMessages(updatedMessages);
      
     }
@@ -154,18 +154,12 @@ const Chatbot = () => {
                   }
                   style={{ float: 'left', marginRight: '8px' }}
                 />
-                <div>{message.image ? (
-                  <img
-            src={message.image}
-            alt="Chatbot"
-            style={{
-            }}heh
-          />
-          
-                ): message.text}</div>
-                <div>
-                  {message.text}
-                </div>
+                <div>{message.image && showDetails ? (
+                  <><img src={message.image} alt="Chatbot" style={{}} heh /><div>
+                    {message.text}
+                  </div></>
+                  ): message.text}</div>
+               
               </div>
               {index === messages.length - 1 && message.isSpecial && (
                 <Box
@@ -179,8 +173,8 @@ const Chatbot = () => {
                   fontSize="12px"
                 >
                   {!showDetails && (
-                    <button onClick={handleDetailsClick}>
-                      View More Details
+                    <button>
+                      Ver Mas Detalles
                     </button>
                   )}
                 </Box>
@@ -190,13 +184,13 @@ const Chatbot = () => {
         </Box>
         <VStack spacing={4} mt={4}>
           <Input
-            placeholder="Type your message..."
+            placeholder="Escribe tu mensaje..."
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             bg="white"
           />
           <Button colorScheme="yellow" onClick={handleSendMessage} >
-            Send
+            Enviar
           </Button>
         </VStack>
       </Box>

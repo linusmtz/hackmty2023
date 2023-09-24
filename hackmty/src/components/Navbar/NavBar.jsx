@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
-const Links = ['Home','Dashboard', 'Projects', 'Team'];
+const Links = ['Inicio','Tablero', 'Proyectos', 'Equipo'];
 
 const NavLink = (props) => {
   const { children } = props;
@@ -101,10 +101,10 @@ export default function NavBar() {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Profile</MenuItem>
+                <MenuItem>Perfil</MenuItem>
                 
                 <MenuDivider />
-                <MenuItem>Logout</MenuItem>
+                <MenuItem>Desconectar</MenuItem>
               </MenuList>
             </Menu>
           </Flex>

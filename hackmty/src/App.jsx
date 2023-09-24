@@ -23,7 +23,7 @@ export default function App() {
               <main>
                 <Routes>
                   <Route
-                    path="/home"
+                    path="/inicio"
                     element={
                       <Home/>
                     }

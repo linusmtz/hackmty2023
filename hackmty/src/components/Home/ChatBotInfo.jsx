@@ -44,15 +44,15 @@ export default function CallToActionWithVideo() {
                 zIndex: -1,
               }}
             >
-              Chat with Your AI 
+              Chatea con tu
             </Text>
             <br />
             <Text as={'span'} color={'red.400'}>
-            Financial Advisor
+            Asesor Financiero Digital
             </Text>
           </Heading>
           <Text color={'gray.500'}>
-          Introducing our latest feature: a cutting-edge AI-powered financial advisor right at your fingertips. Have questions about investments, budgeting, or financial planning? Chat with our AI expert anytime, anywhere, and get personalized advice tailored to your financial goals.
+          Presentamos nuestra última característica: un avanzado asesor financiero impulsado por inteligencia artificial al alcance de tus dedos. ¿Tienes preguntas sobre inversiones, presupuestos o planificación financiera? Chatea con nuestro experto en IA en cualquier momento y lugar, y obtén consejos personalizados adaptados a tus objetivos financieros.
           </Text>
           <Stack spacing={{ base: 4, sm: 6 }} direction={{ base: 'column', sm: 'row' }}>
             <Button
@@ -66,7 +66,7 @@ export default function CallToActionWithVideo() {
              
               
             >
-             <a href="/chatbot" style={{ textDecoration: 'none', color: 'inherit' }}>Get started</a>
+             <a href="/chatbot" style={{ textDecoration: 'none', color: 'inherit' }}>Iniciar</a>
 
             </Button>
             <Button
@@ -76,7 +76,7 @@ export default function CallToActionWithVideo() {
               px={6}
               leftIcon={<PlayIcon h={4} w={4} color={'gray.300'} />}
             >
-              How It Works
+              Como Funciona?
             </Button>
           </Stack>
         </Stack>
