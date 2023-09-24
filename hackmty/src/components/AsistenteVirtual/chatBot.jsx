@@ -52,6 +52,8 @@ const Chatbot = () => {
       borderRadius="md"
       boxShadow="lg"
       bg="red.700"
+      marginTop="4rem"
+      marginBottom="40px"
     >
       <Box
         id="chat-container"
@@ -64,46 +66,46 @@ const Chatbot = () => {
         boxShadow="md"
       >
         {messages.map((message, index) => (
-  <Text
-    key={index}
-    textAlign={message.user ? 'right' : 'left'}
-    bg={message.user ? 'blue.400' : 'gray.400'}
-    color="white"
-    p={2}
-    borderRadius="md"
-    boxShadow="sm"
-    marginBottom="4px"
-    position="relative"
-  >
-    <div style={{ display: 'flex' }}>
-      
-      <Avatar
-        size={'sm'}
-        src={
-          message.user ? 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9' : 'https://media.istockphoto.com/id/1479180033/es/foto/digital-eye-ai-concepto-digital-de-inteligencia-artificial.jpg?s=2048x2048&w=is&k=20&c=vB50zr2XoCvBeAEvfB5SPypPTWEwTVtK-nadDaiSVlA='
-        }
-        style={{ float: 'left', marginRight: '8px' }}
-      />
-      <div>{message.text}</div>
-    </div>
-    {message.isSpecial && (
-      <Box
-        position="absolute"
-        bottom="0"
-        right="0"
-        bg="gray.400"
-        color="white"
-        p={1}
-        borderRadius="md"
-        fontSize="12px"
-      >
-        <button style={border}>
-          View More Details
-        </button>
-      </Box>
-    )}
-  </Text>
-))}
+          <Text
+            key={index}
+            textAlign={message.user ? 'right' : 'left'}
+            bg={message.user ? 'blue.400' : 'gray.400'}
+            color="white"
+            p={2}
+            borderRadius="md"
+            boxShadow="sm"
+            marginBottom="4px"
+            position="relative"
+          >
+            <div style={{ display: 'flex' }}>
+
+              <Avatar
+                size={'sm'}
+                src={
+                  message.user ? 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9' : 'https://media.istockphoto.com/id/1479180033/es/foto/digital-eye-ai-concepto-digital-de-inteligencia-artificial.jpg?s=2048x2048&w=is&k=20&c=vB50zr2XoCvBeAEvfB5SPypPTWEwTVtK-nadDaiSVlA='
+                }
+                style={{ float: 'left', marginRight: '8px' }}
+              />
+              <div>{message.text}</div>
+            </div>
+            {message.isSpecial && (
+              <Box
+                position="absolute"
+                bottom="0"
+                right="0"
+                bg="gray.400"
+                color="white"
+                p={1}
+                borderRadius="md"
+                fontSize="12px"
+              >
+                <button style={border}>
+                  View More Details
+                </button>
+              </Box>
+            )}
+          </Text>
+        ))}
 
       </Box>
       <VStack spacing={4} mt={4}>
