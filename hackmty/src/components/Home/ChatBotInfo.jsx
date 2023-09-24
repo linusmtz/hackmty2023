@@ -13,6 +13,7 @@ import {
   createIcon,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 export default function CallToActionWithVideo() {
   return (
@@ -64,8 +65,11 @@ export default function CallToActionWithVideo() {
               colorScheme={'red'}
               bg={'red.400'}
               _hover={{ bg: 'red.500' }}
+             
+              
             >
-              Get started
+             <a href="/chatbot" style={{ textDecoration: 'none', color: 'inherit' }}>Get started</a>
+
             </Button>
             <Button
               rounded={'full'}

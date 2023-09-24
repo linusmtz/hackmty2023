@@ -16,8 +16,8 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-
-const Links = ['Dashboard', 'Projects', 'Team'];
+import { Link } from 'react-router-dom';
+const Links = ['Home','Dashboard', 'Projects', 'Team'];
 
 const NavLink = (props) => {
   const { children } = props;
@@ -28,16 +28,17 @@ const NavLink = (props) => {
       px={2}
       py={1}
       rounded={'md'}
+      fontSize='1.35rem'
       _hover={{
         textDecoration: 'none',
         bg: useColorModeValue('gray.100', 'black.700'),
         transition:'background-color 0.4s',
         color:"black"
       }}
-      href={'#'}
+      href={`/${children}`}
       color="white"
-      alignSelf="center"
-    >
+
+      >
       {children}
     </Box>
   );
@@ -63,7 +64,7 @@ export default function NavBar() {
           <HStack spacing={8} alignItems={'center'}>
            
            
-          <Box display="flex" alignItems="center" color="white">
+          <Box display="flex" alignItems="center" color="white" marginEnd="200px">
             <Avatar
               name="Banorte Logo" // Provide an appropriate name for accessibility
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Logo_de_Banorte.svg/2560px-Logo_de_Banorte.svg.png" // Replace with the actual image source
@@ -91,7 +92,7 @@ export default function NavBar() {
                 
               >
                 <Avatar
-                  size={'sm'}
+                  size={'md'}
                   src={
                     'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
                   }
