@@ -8,6 +8,7 @@ import {
   Text,
   extendTheme,
   CSSReset,
+  border,
 } from '@chakra-ui/react';
 
 const Chatbot = () => {
@@ -17,19 +18,19 @@ const Chatbot = () => {
   const handleSendMessage = () => {
     if (inputMessage.trim() === '') return;
 
-    // Add user message to the chat
-    const newMessages = messages;
-    newMessages.push({ text: inputMessage, user: true });
-
-    setMessages(messages);
+    // Add user message to the chat history
+    const newMessages = [...messages, { text: inputMessage, user: true }];
+    setMessages(newMessages);
     setInputMessage('');
 
     // Simulate a response from the chatbot (you can replace this with an actual API call)
     setTimeout(() => {
-      setMessages([
-        ...messages,
-        { text: 'Hello, I am the chatbot!', user: false },
-      ]);
+      const botResponse = {
+        text: 'Hello, I am the chatbot!',
+        user: false,
+        isSpecial: true, // Add a flag to mark it as a special message
+      };
+      setMessages([...newMessages, botResponse]);
     }, 1000);
   };
 
@@ -50,7 +51,6 @@ const Chatbot = () => {
       borderRadius="md"
       boxShadow="lg"
       bg="red.700"
-      
     >
       <Box
         id="chat-container"
@@ -72,9 +72,25 @@ const Chatbot = () => {
             borderRadius="md"
             boxShadow="sm"
             marginBottom="4px"
-
+            position="relative" // Position relative for absolute positioning of "View More Details"
           >
             {message.text}
+            {message.isSpecial && (
+              <Box
+                position="absolute"
+                bottom="0"
+                right="0"
+                bg="gray.400  "
+                color="white"
+                p={1}
+                borderRadius="md"
+                fontSize="12px"
+              >
+                <button style={border}>
+                View More Details
+                </button>
+              </Box>
+            )}
           </Text>
         ))}
       </Box>
