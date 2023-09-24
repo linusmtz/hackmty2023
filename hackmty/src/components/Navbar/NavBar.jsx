@@ -32,9 +32,12 @@ const NavLink = (props) => {
       _hover={{
         textDecoration: 'none',
         bg: useColorModeValue('gray.100', 'black.700'),
-        transition:'background-color 0.4s'
+        transition:'background-color 0.4s',
+        color:"black"
       }}
       href={'#'}
+      color="white"
+      
     >
       {children}
     </Box>
@@ -54,12 +57,13 @@ export default function NavBar() {
             aria-label={'Open Menu'}
             display={{ md: 'none' }}
             onClick={isOpen ? onClose : onOpen}
+            
 
           />
           <HStack spacing={8} alignItems={'center'}>
            
-            <Box>Banorte</Box>
-            <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
+            <Box color="white">Banorte</Box>
+            <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }} >
               {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
               ))}
@@ -73,6 +77,7 @@ export default function NavBar() {
                 variant={'link'}
                 cursor={'pointer'}
                 minW={0}
+                
               >
                 <Avatar
                   size={'sm'}
