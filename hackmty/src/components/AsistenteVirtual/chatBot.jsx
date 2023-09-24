@@ -41,11 +41,13 @@ const Chatbot = () => {
   return (
     <Box
       p={4}
-      maxW="400px"
+      maxW="800px"
       mx="auto"
-      border="1px solid #ccc"
+      border="2px solid #ccc"
       borderRadius="md"
       boxShadow="lg"
+      bg="red.700"
+      
     >
       <Box
         id="chat-container"
@@ -67,6 +69,7 @@ const Chatbot = () => {
             borderRadius="md"
             boxShadow="sm"
             marginBottom="4px"
+
           >
             {message.text}
           </Text>
@@ -77,6 +80,7 @@ const Chatbot = () => {
           placeholder="Type your message..."
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
+          bg="white"
         />
         <Button colorScheme="blue" onClick={handleSendMessage}>
           Send

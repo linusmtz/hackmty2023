@@ -31,7 +31,8 @@ const NavLink = (props) => {
       rounded={'md'}
       _hover={{
         textDecoration: 'none',
-        bg: useColorModeValue('gray.200', 'gray.700'),
+        bg: useColorModeValue('gray.100', 'black.700'),
+        transition:'background-color 0.4s'
       }}
       href={'#'}
     >
@@ -45,7 +46,7 @@ export default function NavBar() {
 
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+      <Box bg={useColorModeValue('red.600', 'red.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
@@ -53,6 +54,7 @@ export default function NavBar() {
             aria-label={'Open Menu'}
             display={{ md: 'none' }}
             onClick={isOpen ? onClose : onOpen}
+
           />
           <HStack spacing={8} alignItems={'center'}>
            
