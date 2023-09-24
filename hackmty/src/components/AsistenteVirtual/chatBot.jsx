@@ -11,6 +11,7 @@ import {
   Avatar,
   Heading,
   Badge,
+  Divider
 } from '@chakra-ui/react';
 
 function ChatList() {
@@ -27,22 +28,33 @@ function ChatList() {
       p={4}
       maxHeight="calc(100vh - 120px)" // Adjust the height as needed
       overflowY="auto" // Enable scrolling if the chat list overflows
+      borderRadius="md"
+      boxShadow="md"
     >
       <VStack spacing={2} align="left">
         {chatList.map((chat) => (
           <Box
             key={chat.id}
-            p={2}
+            p={3}
             borderRadius="md"
             borderWidth="1px"
-            borderColor="gray.300"
+            borderColor="gray.200"
             _hover={{
-              bg: 'blue.100',
+              bg: 'blue.50',
               cursor: 'pointer',
             }}
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
           >
-            <Text fontWeight="semibold">{chat.name}</Text>
-            <Badge colorScheme="blue">Unread</Badge> {/* You can add a badge for unread messages */}
+            <VStack align="left" spacing={0}>
+              <Text fontWeight="semibold">{chat.name}</Text>
+              <Badge colorScheme="blue">Unread</Badge> {/* You can add a badge for unread messages */}
+            </VStack>
+            <Divider orientation="vertical" />
+            <Text fontSize="sm" color="gray.500">
+              2h ago
+            </Text>
           </Box>
         ))}
       </VStack>
@@ -110,101 +122,91 @@ const Chatbot = () => {
   }, [messages]);
 
   return (
-
-    <Box display="grid" gridTemplateColumns="1fr 3fr 1fr" height="auto ">
-    <ChatList />
-    
-    <Box
-      p={4}
-      
-      border="2px solid #ccc"
-      borderRadius="md"
-      boxShadow="lg"
-      bg="red.700"
-      marginTop="20px"
-      marginBottom="40px"
-    >
-
-<Heading as="h2" size="lg" color="white" textAlign="center" >
-  Banorte MoneyMentor
-  </Heading>
-    
-    
+    <Box display="grid" gridTemplateColumns="1fr 3fr 1fr" height="auto">
+      <ChatList />
       <Box
-        id="chat-container"
         p={4}
+        border="2px solid #ccc"
         borderRadius="md"
-        minHeight="300px"
-        maxHeight="300px"
-        overflowY="auto"
-        bg="white"
-        boxShadow="md"
+        boxShadow="lg"
+        bg="red.700"
+        marginTop="20px"
+        marginBottom="40px"
+        width="100%"
       >
-
-
-        {messages.map((message, index) => (
-          <Text
-            key={index}
-            textAlign={message.user ? 'right' : 'left'}
-            bg={message.user ? 'blue.400' : 'gray.400'}
-            color="white"
-            p={2}
-            borderRadius="md"
-            boxShadow="sm"
-            marginBottom="4px"
-            position="relative"
-          >
-            <div style={{ display: 'flex' }}>
-              <Avatar
-                size={'sm'}
-                src={
-                  message.user
-                    ? 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                    : 'https://media.istockphoto.com/id/1479180033/es/foto/digital-eye-ai-concepto-digital-de-inteligencia-artificial.jpg?s=2048x2048&w=is&k=20&c=vB50zr2XoCvBeAEvfB5SPypPTWEwTVtK-nadDaiSVlA='
-                }
-                style={{ float: 'left', marginRight: '8px' }}
-              />
-              <div>{message.text}</div>
-            </div>
-            {index === messages.length - 1 && message.isSpecial && (
-              <Box
-                position="absolute"
-                bottom="0"
-                right="0"
-                bg="gray.400"
-                color="white"
-                p={1}
-                borderRadius="md"
-                fontSize="12px"
-              >
-                { 
-                  !showDetails && 
-                  <button onClick={handleDetailsClick}>
-                    View More Details
-                  </button>
-                }
-                
-              </Box>
-            )}
-          </Text>
-        ))}
-      </Box>
-      <VStack spacing={4} mt={4}>
-        <Input
-          placeholder="Type your message..."
-          value={inputMessage}
-          onChange={(e) => setInputMessage(e.target.value)}
+        <Heading as="h2" size="lg" color="white" textAlign="center">
+          Banorte MoneyMentor
+        </Heading>
+        <Box
+          id="chat-container"
+          p={4}
+          borderRadius="md"
+          minHeight="300px"
+          maxHeight="300px"
+          overflowY="auto"
           bg="white"
-        />
-        <Button colorScheme="yellow" onClick={handleSendMessage}>
-          Send
-        </Button>
-      </VStack>
+          boxShadow="md"
+        >
+          {messages.map((message, index) => (
+            <Text
+              key={index}
+              textAlign={message.user ? 'right' : 'left'}
+              bg={message.user ? 'blue.400' : 'gray.400'}
+              color="white"
+              p={2}
+              borderRadius="md"
+              boxShadow="sm"
+              marginBottom="4px"
+              position="relative"
+            >
+              <div style={{ display: 'flex' }}>
+                <Avatar
+                  size={'sm'}
+                  src={
+                    message.user
+                      ? 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                      : 'https://media.istockphoto.com/id/1479180033/es/foto/digital-eye-ai-concepto-digital-de-inteligencia-artificial.jpg?s=2048x2048&w=is&k=20&c=vB50zr2XoCvBeAEvfB5SPypPTWEwTVtK-nadDaiSVlA='
+                  }
+                  style={{ float: 'left', marginRight: '8px' }}
+                />
+                <div>{message.text}</div>
+              </div>
+              {index === messages.length - 1 && message.isSpecial && (
+                <Box
+                  position="absolute"
+                  bottom="0"
+                  right="0"
+                  bg="gray.400"
+                  color="white"
+                  p={1}
+                  borderRadius="md"
+                  fontSize="12px"
+                >
+                  {!showDetails && (
+                    <button onClick={handleDetailsClick}>
+                      View More Details
+                    </button>
+                  )}
+                </Box>
+              )}
+            </Text>
+          ))}
+        </Box>
+        <VStack spacing={4} mt={4}>
+          <Input
+            placeholder="Type your message..."
+            value={inputMessage}
+            onChange={(e) => setInputMessage(e.target.value)}
+            bg="white"
+          />
+          <Button colorScheme="yellow" onClick={handleSendMessage}>
+            Send
+          </Button>
+        </VStack>
+      </Box>
     </Box>
-    </Box> 
   );
- 
-};
+}
 
 const theme = extendTheme({
   styles: {
