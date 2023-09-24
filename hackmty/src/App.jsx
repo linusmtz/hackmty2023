@@ -9,6 +9,8 @@ import "./App.css";
 import { ChakraProvider } from '@chakra-ui/react'
 import NavBar from "./components/Navbar/NavBar";
 
+import Chatview from "./components/AsistenteVirtual/chatView"
+
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -26,7 +28,15 @@ export default function App() {
                       <Home/>
                     }
                   />
+
+                  <Route
+                    path="/chatbot"
+                    element={
+                      <Chatview/>
+                    }
+                  />
                 </Routes>
+                
               </main>
             </BrowserRouter>
         </ChakraProvider>
