@@ -8,16 +8,18 @@ import {
   Text,
   extendTheme,
   CSSReset,
-  border,
   Avatar,
 } from '@chakra-ui/react';
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
+  const [showDetails, setShowDetails] = useState(false); // State to track if details should be shown
 
   const handleSendMessage = () => {
     if (inputMessage.trim() === '') return;
+
+    setShowDetails(false);
 
     // Add user message to the chat history
     const newMessages = [...messages, { text: inputMessage, user: true }];
@@ -33,6 +35,31 @@ const Chatbot = () => {
       };
       setMessages([...newMessages, botResponse]);
     }, 1000);
+  };
+
+  // Function to handle "View More Details" button click
+  const handleDetailsClick = () => {
+    // Toggle the showDetails state when the button is clicked
+    setShowDetails(!showDetails);
+
+    // Find the index of the last chatbot message in the messages array
+    const lastBotResponseIndex = messages
+      .slice()
+      .reverse()
+      .findIndex((message) => message.user === false && message.isSpecial);
+
+    if (lastBotResponseIndex !== -1) {
+      // Calculate the index in the original array
+      const originalIndex =
+        messages.length - 1 - lastBotResponseIndex;
+
+      // Update the text of the last chatbot message
+      const updatedMessages = [...messages];
+      updatedMessages[originalIndex].text = showDetails
+        ? 'Hello, I am the chatbot!'
+        : 'hello friendhello friendhello friendhello friendhello friendhello frweewewewewiendhello friendhello friendhello friendhello friend';
+      setMessages(updatedMessages);
+    }
   };
 
   // Scroll to the bottom of the chat when new messages arrive
@@ -78,17 +105,18 @@ const Chatbot = () => {
             position="relative"
           >
             <div style={{ display: 'flex' }}>
-
               <Avatar
                 size={'sm'}
                 src={
-                  message.user ? 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9' : 'https://media.istockphoto.com/id/1479180033/es/foto/digital-eye-ai-concepto-digital-de-inteligencia-artificial.jpg?s=2048x2048&w=is&k=20&c=vB50zr2XoCvBeAEvfB5SPypPTWEwTVtK-nadDaiSVlA='
+                  message.user
+                    ? 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                    : 'https://media.istockphoto.com/id/1479180033/es/foto/digital-eye-ai-concepto-digital-de-inteligencia-artificial.jpg?s=2048x2048&w=is&k=20&c=vB50zr2XoCvBeAEvfB5SPypPTWEwTVtK-nadDaiSVlA='
                 }
                 style={{ float: 'left', marginRight: '8px' }}
               />
               <div>{message.text}</div>
             </div>
-            {message.isSpecial && (
+            {index === messages.length - 1 && message.isSpecial && (
               <Box
                 position="absolute"
                 bottom="0"
@@ -99,14 +127,17 @@ const Chatbot = () => {
                 borderRadius="md"
                 fontSize="12px"
               >
-                <button style={border}>
-                  View More Details
-                </button>
+                { 
+                  !showDetails && 
+                  <button onClick={handleDetailsClick}>
+                    View More Details
+                  </button>
+                }
+                
               </Box>
             )}
           </Text>
         ))}
-
       </Box>
       <VStack spacing={4} mt={4}>
         <Input
