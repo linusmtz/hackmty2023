@@ -111,7 +111,7 @@ const Chatbot = () => {
 
   return (
 
-    <Box display="grid" gridTemplateColumns="1fr 3fr 1fr" height="100vh">
+    <Box display="grid" gridTemplateColumns="1fr 3fr 1fr" height="auto ">
     <ChatList />
     
     <Box
@@ -121,11 +121,11 @@ const Chatbot = () => {
       borderRadius="md"
       boxShadow="lg"
       bg="red.700"
-      
+      marginTop="20px"
       marginBottom="40px"
     >
 
-<Heading as="h2" size="lg" color="white" textAlign="center">
+<Heading as="h2" size="lg" color="white" textAlign="center" >
   Banorte MoneyMentor
   </Heading>
     
