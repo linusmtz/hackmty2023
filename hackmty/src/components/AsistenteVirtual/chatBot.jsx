@@ -18,7 +18,10 @@ const Chatbot = () => {
     if (inputMessage.trim() === '') return;
 
     // Add user message to the chat
-    setMessages([...messages, { text: inputMessage, user: true }]);
+    const newMessages = messages;
+    newMessages.push({ text: inputMessage, user: true });
+
+    setMessages(messages);
     setInputMessage('');
 
     // Simulate a response from the chatbot (you can replace this with an actual API call)
