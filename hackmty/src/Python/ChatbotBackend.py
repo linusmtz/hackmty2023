@@ -73,7 +73,7 @@ respuesta = openai.ChatCompletion.create(
 
 respString = respuesta["choices"][0]["message"]["content"]
 
-file_path_historial = "Responses/historialDeMensajes.txt"
+file_path_historial = "hackmty/src/Python/Responses/historialDeMensajes.txt"
 file_exists = os.path.exists(file_path_historial)
 
 if file_exists:
@@ -98,5 +98,5 @@ if file_exists:
 else:
     write_string_to_file(resp, file_path_historial)
 
-file_path_respActual = "Responses/respuestaActual.txt"
+file_path_respActual = "hackmty/src/Python/Responses/respuestaActual.txt"
 write_string_to_file(resp, file_path_respActual)
