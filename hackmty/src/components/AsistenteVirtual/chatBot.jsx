@@ -210,7 +210,7 @@ const Chatbot = () => {
             onChange={(e) => setInputMessage(e.target.value)}
             bg="white"
           />
-          <Button colorScheme="yellow" onClick={handleSendMessage}>
+          <Button colorScheme="yellow" onClick={handleSendMessage} >
             Send
           </Button>
         </VStack>

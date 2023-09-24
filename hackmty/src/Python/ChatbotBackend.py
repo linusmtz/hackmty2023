@@ -9,17 +9,19 @@ Original file is located at
 """
 from ucimlrepo import fetch_ucirepo
 import openai
-import os
+import os 
+from dotenv import load_dotenv
+
+load_dotenv()
 
 bank_marketing = fetch_ucirepo(id=222)
 
-ORGANIZATION_ID = "org-CEVV0qeRKuGnHn2Xrl7DSKxY"
-API_KEY = "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"
+
 
 entradas = bank_marketing.data.features
 
-openai.organization = ORGANIZATION_ID
-openai.api_key = API_KEY
+openai.organization = os.getenv("ORGANIZATION_ID")
+openai.api_key = os.getenv("API_KEY")
 
 
 def write_string_to_file(content, file_path):
