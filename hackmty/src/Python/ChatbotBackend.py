@@ -9,11 +9,12 @@ Original file is located at
 """
 from ucimlrepo import fetch_ucirepo
 import openai
+import os
 
 bank_marketing = fetch_ucirepo(id=222)
 
 ORGANIZATION_ID = "org-CEVV0qeRKuGnHn2Xrl7DSKxY"
-API_KEY = "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"
+API_KEY = "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"
 
 entradas = bank_marketing.data.features
 
@@ -69,9 +70,16 @@ respuesta = openai.ChatCompletion.create(
                     )
 
 respString = respuesta["choices"][0]["message"]["content"]
-file_path_resumido = "Responses/respuesta.txt"
-append_string_to_file(respString, file_path_resumido)
-contextOfTheUser = respuesta["choices"][0]["message"]["content"]
+
+file_path_historial = "Responses/historialDeMensajes.txt"
+file_exists = os.path.exists(file_path_historial)
+
+if file_exists:
+    append_string_to_file(respString, file_path_historial)
+else:
+    write_string_to_file(respString, file_path_historial)
+
+contextOfTheUser = respuesta["choices"][0]["message"]["content"] + read_file_to_string(file_path_historial)
 
 consejoFinanciero = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
@@ -82,8 +90,11 @@ consejoFinanciero = openai.ChatCompletion.create(
                     ]
                     )
 
-append_string_to_file(consejoFinanciero["choices"][0]["message"]["content"], "Responses/2doPRompt.txt")
-
 resp = consejoFinanciero["choices"][0]["message"]["content"]
+if file_exists:
+    append_string_to_file(resp, file_path_historial)
+else:
+    write_string_to_file(resp, file_path_historial)
 
-
+file_path_respActual = "Responses/respuestaActual.txt"
+write_string_to_file(resp, file_path_respActual)
