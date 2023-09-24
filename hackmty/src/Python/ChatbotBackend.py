@@ -13,6 +13,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask,request,jsonify
 from flask_cors import CORS
+import pandas as pd
 app = Flask(__name__)
 CORS(app)
 load_dotenv()
@@ -63,20 +64,33 @@ def append_string_to_file(string_to_append, file_path):
     except Exception as e:
         print(f"An error occurred: {str(e)}")
 
+secretPrompt = "Vas a actuar como un asesor financiero, tu trabajo es clasificar el siguiente ejemplo dentro de una de las siguientes campos: Retail Clients, High Net Worth, Corporate Client, SME, Institutional Client y lo vas a describir sin usar las partes sobre el estudio de marketing"
 def setBotContext():
-    secretPrompt = "Vas a actuar como un asesor financiero, tu trabajo es clasificar el siguiente ejemplo dentro de una de las siguientes campos: Retail Clients, High Net Worth, Corporate Client, SME, Institutional Client y lo vas a describir sin usar las partes sobre el estudio de marketing"
 
     file_path_historial = "hackmty/src/Python/Responses/historialDeMensajes.txt"
     file_exists = os.path.exists(file_path_historial)
     contextoMaquina = ""
     if file_exists:
         contextoMaquina = read_file_to_string(file_path_historial)
+
+    data = {
+    'age': [20],
+    'job': ['student'],
+    'marital': ['single'],
+    'education': ['high school'],
+    'default': [0],  # Assuming the person has no credit in default
+    'balance': [0],  # Assuming the person has no money in the bank
+    'housing': [0],  # Assuming the person doesn't have a housing loan
+    'loan': [0]      # Assuming the person doesn't have a personal loan
+    }
+
+    personaPrueba = pd.DataFrame(data)
     respuesta = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
                     messages=[
                         {"role": "system", "content": secretPrompt},
                         {"role": "system", "content": contextoMaquina},
-                        {"role": "user", "content": str(entradas.loc[0])}
+                        {"role": "user", "content": str(personaPrueba)}
                     ]
                     )
 
@@ -96,6 +110,7 @@ def hello_world():
 
 @app.route('/entrada', methods=['POST'])
 def sendUserInput():
+    setBotContext()
     data = request.json
     
     entradaDeUsuario = data['inputUser']
@@ -108,8 +123,10 @@ def sendUserInput():
     consejoFinanciero = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
                     messages=[
+                        {"role": "system", "content": secretPrompt},
                         {"role": "system", "content": read_file_to_string(file_path_historial)},
                         {"role": "system", "content": "Evita decir que eres una Inteligencia Artificial, evita redirigirlo a un asesor bancario o banco"},
+                        {"role": "system", "content": "Se lo mas breve posible"},
                         {"role": "user", "content": entradaDeUsuario}
                     ]
                     )

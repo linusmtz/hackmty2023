@@ -65,14 +65,16 @@ export default function NavBar() {
            
            
           <Box display="flex" alignItems="center" color="white" marginEnd="200px">
-            <Avatar
-              name="Banorte Logo" // Provide an appropriate name for accessibility
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Logo_de_Banorte.svg/2560px-Logo_de_Banorte.svg.png" // Replace with the actual image source
-               // Adjust the size of the image as needed
-              marginRight="8px" // Add spacing between the image and text
-              backgroundSize="cover"
-              width="auto"
-            />
+            <div className='d-md-block d-none'>
+              <Avatar
+                name="Banorte Logo" // Provide an appropriate name for accessibility
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Logo_de_Banorte.svg/2560px-Logo_de_Banorte.svg.png" // Replace with the actual image source
+                // Adjust the size of the image as needed
+                marginRight="8px" // Add spacing between the image and text
+                backgroundSize="cover"
+                width="auto"
+              />
+            </div>
           </Box>
 
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }} >
