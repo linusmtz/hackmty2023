@@ -11,7 +11,10 @@ from ucimlrepo import fetch_ucirepo
 import openai
 import os 
 from dotenv import load_dotenv
-
+from flask import Flask,request,jsonify
+from flask_cors import CORS
+app = Flask(__name__)
+CORS(app)
 load_dotenv()
 
 bank_marketing = fetch_ucirepo(id=222)
@@ -60,43 +63,69 @@ def append_string_to_file(string_to_append, file_path):
     except Exception as e:
         print(f"An error occurred: {str(e)}")
 
-    
-secretPrompt = "Vas a actuar como un asesor financiero, tu trabajo es clasificar el siguiente ejemplo dentro de una de las siguientes campos: Retail Clients, High Net Worth, Corporate Client, SME, Institutional Client y lo vas a describir sin usar las partes sobre el estudio de marketing"
+def setBotContext():
+    secretPrompt = "Vas a actuar como un asesor financiero, tu trabajo es clasificar el siguiente ejemplo dentro de una de las siguientes campos: Retail Clients, High Net Worth, Corporate Client, SME, Institutional Client y lo vas a describir sin usar las partes sobre el estudio de marketing"
 
-respuesta = openai.ChatCompletion.create(
+    file_path_historial = "hackmty/src/Python/Responses/historialDeMensajes.txt"
+    file_exists = os.path.exists(file_path_historial)
+    contextoMaquina = ""
+    if file_exists:
+        contextoMaquina = read_file_to_string(file_path_historial)
+    respuesta = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
                     messages=[
                         {"role": "system", "content": secretPrompt},
+                        {"role": "system", "content": contextoMaquina},
                         {"role": "user", "content": str(entradas.loc[0])}
                     ]
                     )
 
-respString = respuesta["choices"][0]["message"]["content"]
+    respString = respuesta["choices"][0]["message"]["content"]
 
-file_path_historial = "hackmty/src/Python/Responses/historialDeMensajes.txt"
-file_exists = os.path.exists(file_path_historial)
+    if file_exists:
+        append_string_to_file(respString, file_path_historial)
+    else:
+        write_string_to_file(respString, file_path_historial)
+        contextOfTheUser = respuesta["choices"][0]["message"]["content"] + read_file_to_string(file_path_historial)
 
-if file_exists:
-    append_string_to_file(respString, file_path_historial)
-else:
-    write_string_to_file(respString, file_path_historial)
 
-contextOfTheUser = respuesta["choices"][0]["message"]["content"] + read_file_to_string(file_path_historial)
+@app.route('/s')
+def hello_world():
+    return 'Hello, World!'
 
-consejoFinanciero = openai.ChatCompletion.create(
+
+@app.route('/entrada', methods=['POST'])
+def sendUserInput():
+    data = request.json
+    
+    entradaDeUsuario = data['inputUser']
+
+    file_path_respActual = "hackmty/src/Python/Responses/respActual.txt"
+
+    file_path_historial = "hackmty/src/Python/Responses/historialDeMensajes.txt"
+    file_exists = os.path.exists(file_path_historial)
+
+    consejoFinanciero = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
                     messages=[
-                        {"role": "system", "content": contextOfTheUser},
+                        {"role": "system", "content": read_file_to_string(file_path_historial)},
                         {"role": "system", "content": "Evita decir que eres una Inteligencia Artificial, evita redirigirlo a un asesor bancario o banco"},
-                        {"role": "user", "content": "En el caso de que este cliente quisiera invertir en cetes directo, que es lo que el banco le recomendaría?"}
+                        {"role": "user", "content": entradaDeUsuario}
                     ]
                     )
 
-resp = consejoFinanciero["choices"][0]["message"]["content"]
-if file_exists:
-    append_string_to_file(resp, file_path_historial)
-else:
-    write_string_to_file(resp, file_path_historial)
+    resp = consejoFinanciero["choices"][0]["message"]["content"]
+    if file_exists:
+        append_string_to_file(resp, file_path_historial)
+    else:
+        write_string_to_file(resp, file_path_historial)
 
-file_path_respActual = "hackmty/src/Python/Responses/respuestaActual.txt"
-write_string_to_file(resp, file_path_respActual)
+    
+    write_string_to_file(resp, file_path_respActual)
+    return entradaDeUsuario
+
+#setBotContext()
+#sendUserInput("En el caso de que este cliente quisiera invertir en Bienes Raices, que es lo que el banco le recomendaría?")
+
+if __name__ == '__main__':
+    app.run()

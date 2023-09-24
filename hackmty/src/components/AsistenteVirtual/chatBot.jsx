@@ -13,6 +13,7 @@ import {
   Badge,
   Divider
 } from '@chakra-ui/react';
+import axios from 'axios';
 
 
 function ChatList() {
@@ -68,8 +69,19 @@ const Chatbot = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [showDetails, setShowDetails] = useState(false); // State to track if details should be shown
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputMessage.trim() === '') return;
+
+    try {
+      const data = { 
+        'inputUser': inputMessage
+      };
+
+      const response = await axios.post('http://localhost:5000/entrada',data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
 
     setShowDetails(false);
 
