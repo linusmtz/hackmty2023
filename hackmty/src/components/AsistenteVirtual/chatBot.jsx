@@ -14,6 +14,7 @@ import {
   Divider
 } from '@chakra-ui/react';
 
+
 function ChatList() {
   // Sample list of chats (you can replace with dynamic data)
   const chatList = [
@@ -76,11 +77,12 @@ const Chatbot = () => {
     const newMessages = [...messages, { text: inputMessage, user: true }];
     setMessages(newMessages);
     setInputMessage('');
-
+    
     // Simulate a response from the chatbot (you can replace this with an actual API call)
     setTimeout(() => {
       const botResponse = {
         text: 'Hello, I am the chatbot!',
+        image: messages.length > 4 ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Logo_de_Banorte.svg/2560px-Logo_de_Banorte.svg.png' : null,
         user: false,
         isSpecial: true, // Add a flag to mark it as a special message
       };
@@ -98,7 +100,7 @@ const Chatbot = () => {
       .slice()
       .reverse()
       .findIndex((message) => message.user === false && message.isSpecial);
-
+      
     if (lastBotResponseIndex !== -1) {
       // Calculate the index in the original array
       const originalIndex =
@@ -110,6 +112,7 @@ const Chatbot = () => {
         ? 'Hello, I am the chatbot!'
         : 'hello friendhello friendhello friendhello friendhello friendhello frweewewewewiendhello friendhello friendhello friendhello friend';
       setMessages(updatedMessages);
+     
     }
   };
 
@@ -169,7 +172,15 @@ const Chatbot = () => {
                   }
                   style={{ float: 'left', marginRight: '8px' }}
                 />
-                <div>{message.text}</div>
+                <div>{message.image ? (
+                  <img
+            src={message.image}
+            alt="Chatbot"
+            style={{
+            }}heh
+          />
+          
+                ): message.text}</div>
               </div>
               {index === messages.length - 1 && message.isSpecial && (
                 <Box
