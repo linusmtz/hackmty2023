@@ -44,17 +44,15 @@ export default function CallToActionWithVideo() {
                 zIndex: -1,
               }}
             >
-              Write once,
+              Chat with Your AI 
             </Text>
             <br />
             <Text as={'span'} color={'red.400'}>
-              use everywhere!
+            Financial Advisor
             </Text>
           </Heading>
           <Text color={'gray.500'}>
-            Snippy is a rich coding snippets app that lets you create your own code
-            snippets, categorize them, and even sync them in the cloud so you can use them
-            anywhere. All that is free!
+          Introducing our latest feature: a cutting-edge AI-powered financial advisor right at your fingertips. Have questions about investments, budgeting, or financial planning? Chat with our AI expert anytime, anywhere, and get personalized advice tailored to your financial goals.
           </Text>
           <Stack spacing={{ base: 4, sm: 6 }} direction={{ base: 'column', sm: 'row' }}>
             <Button

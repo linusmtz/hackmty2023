@@ -15,52 +15,18 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 
+const chatList = [
+  { id: 1, name: 'Tax-Efficient Investing', time: 1 },
+  { id: 2, name: 'Stock Market Analysis', time: 3 },
+  { id: 3, name: 'Different Investment Strategies', time: 7 },
+];
 
 function ChatList() {
   // Sample list of chats (you can replace with dynamic data)
-  const chatList = [
-    { id: 1, name: 'Chat 1' },
-    { id: 2, name: 'Chat 2' },
-    { id: 3, name: 'Chat 3' },
-  ];
+  
 
   return (
-    <Box
-      bg="gray.200"
-      p={4}
-      maxHeight="calc(100vh - 120px)" // Adjust the height as needed
-      overflowY="auto" // Enable scrolling if the chat list overflows
-      borderRadius="md"
-      boxShadow="md"
-    >
-      <VStack spacing={2} align="left">
-        {chatList.map((chat) => (
-          <Box
-            key={chat.id}
-            p={3}
-            borderRadius="md"
-            borderWidth="1px"
-            borderColor="gray.200"
-            _hover={{
-              bg: 'blue.50',
-              cursor: 'pointer',
-            }}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <VStack align="left" spacing={0}>
-              <Text fontWeight="semibold">{chat.name}</Text>
-              <Badge colorScheme="blue">Unread</Badge> {/* You can add a badge for unread messages */}
-            </VStack>
-            <Divider orientation="vertical" />
-            <Text fontSize="sm" color="gray.500">
-              2h ago
-            </Text>
-          </Box>
-        ))}
-      </VStack>
-    </Box>
+    <div></div>
   );
 }
 
@@ -97,7 +63,7 @@ const Chatbot = () => {
     setTimeout(() => {
       const botResponse = {
         text: respuesta,
-        image: messages.length > 4 ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Logo_de_Banorte.svg/2560px-Logo_de_Banorte.svg.png' : null,
+        image: messages.length > 0 ? 'https://aristeguinoticias.com/_next/image/?url=https%3A%2F%2Feditorial.aristeguinoticias.com%2Fwp-content%2Fuploads%2F2022%2F03%2Fprecio-barril-petroleo-mexico-pemex-grafica.jpg&w=1200&q=75' : null,
         user: false,
         isSpecial: true, // Add a flag to mark it as a special message
       };
@@ -140,7 +106,7 @@ const Chatbot = () => {
   }, [messages]);
 
   return (
-    <Box display="grid" gridTemplateColumns="1fr 3fr 1fr" height="auto">
+    <Box display="grid" gridTemplateColumns="1fr 3fr 1fr" height="auto" >
       <ChatList />
       <Box
         p={4}
@@ -148,11 +114,12 @@ const Chatbot = () => {
         borderRadius="md"
         boxShadow="lg"
         bg="red.700"
-        marginTop="20px"
+        marginTop="80px"
         marginBottom="40px"
         width="100%"
+        
       >
-        <Heading as="h2" size="lg" color="white" textAlign="center">
+        <Heading as="h2" size="lg" color="white" textAlign="center" >
           Banorte MoneyMentor
         </Heading>
         <Box
@@ -196,6 +163,9 @@ const Chatbot = () => {
           />
           
                 ): message.text}</div>
+                <div>
+                  {message.text}
+                </div>
               </div>
               {index === messages.length - 1 && message.isSpecial && (
                 <Box
