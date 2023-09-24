@@ -9,7 +9,46 @@ import {
   extendTheme,
   CSSReset,
   Avatar,
+  Heading,
+  Badge,
 } from '@chakra-ui/react';
+
+function ChatList() {
+  // Sample list of chats (you can replace with dynamic data)
+  const chatList = [
+    { id: 1, name: 'Chat 1' },
+    { id: 2, name: 'Chat 2' },
+    { id: 3, name: 'Chat 3' },
+  ];
+
+  return (
+    <Box
+      bg="gray.200"
+      p={4}
+      maxHeight="calc(100vh - 120px)" // Adjust the height as needed
+      overflowY="auto" // Enable scrolling if the chat list overflows
+    >
+      <VStack spacing={2} align="left">
+        {chatList.map((chat) => (
+          <Box
+            key={chat.id}
+            p={2}
+            borderRadius="md"
+            borderWidth="1px"
+            borderColor="gray.300"
+            _hover={{
+              bg: 'blue.100',
+              cursor: 'pointer',
+            }}
+          >
+            <Text fontWeight="semibold">{chat.name}</Text>
+            <Badge colorScheme="blue">Unread</Badge> {/* You can add a badge for unread messages */}
+          </Box>
+        ))}
+      </VStack>
+    </Box>
+  );
+}
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
@@ -71,17 +110,26 @@ const Chatbot = () => {
   }, [messages]);
 
   return (
+
+    <Box display="grid" gridTemplateColumns="1fr 3fr 1fr" height="100vh">
+    <ChatList />
+    
     <Box
       p={4}
-      maxW="800px"
-      mx="auto"
+      
       border="2px solid #ccc"
       borderRadius="md"
       boxShadow="lg"
       bg="red.700"
-      marginTop="4rem"
+      
       marginBottom="40px"
     >
+
+<Heading as="h2" size="lg" color="white" textAlign="center">
+  Banorte MoneyMentor
+  </Heading>
+    
+    
       <Box
         id="chat-container"
         p={4}
@@ -92,6 +140,8 @@ const Chatbot = () => {
         bg="white"
         boxShadow="md"
       >
+
+
         {messages.map((message, index) => (
           <Text
             key={index}
@@ -146,12 +196,14 @@ const Chatbot = () => {
           onChange={(e) => setInputMessage(e.target.value)}
           bg="white"
         />
-        <Button colorScheme="blue" onClick={handleSendMessage}>
+        <Button colorScheme="yellow" onClick={handleSendMessage}>
           Send
         </Button>
       </VStack>
     </Box>
+    </Box> 
   );
+ 
 };
 
 const theme = extendTheme({
